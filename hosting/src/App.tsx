@@ -2,6 +2,14 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithRedirect } from "firebase/auth";
+
+
+const provider = new GoogleAuthProvider();
+
+const auth = getAuth();
+signInWithRedirect(auth, provider);
 
 function App() {
   const [count, setCount] = useState(0)
