@@ -6,14 +6,14 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { getAuth, signInWithRedirect } from "firebase/auth";
 
 
-const provider = new GoogleAuthProvider();
-
-const auth = getAuth();
-signInWithRedirect(auth, provider);
 
 function App() {
   const [count, setCount] = useState(0)
-
+  const provider = new GoogleAuthProvider();
+  
+  const auth = getAuth();
+  signInWithRedirect(auth, provider);
+  
   return (
     <div className="App">
       <div>
