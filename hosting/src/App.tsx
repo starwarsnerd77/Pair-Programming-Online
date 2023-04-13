@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -12,26 +12,29 @@ import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBuPjEO3_9gwMgCIHWKmzedMA9B4Ygpj94",
-  authDomain: "pair-programming-online.firebaseapp.com",
-  projectId: "pair-programming-online",
-  storageBucket: "pair-programming-online.appspot.com",
-  messagingSenderId: "691021243768",
-  appId: "1:691021243768:web:dec62d48f230d6c200548d",
-  measurementId: "G-QXYES6B1X2"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-const provider = new GoogleAuthProvider();
-
-const auth = getAuth();
-signInWithRedirect(auth, provider);
 
 function App() {
+  useEffect(() => {
+    const firebaseConfig = {
+      apiKey: "AIzaSyBuPjEO3_9gwMgCIHWKmzedMA9B4Ygpj94",
+      authDomain: "pair-programming-online.firebaseapp.com",
+      projectId: "pair-programming-online",
+      storageBucket: "pair-programming-online.appspot.com",
+      messagingSenderId: "691021243768",
+      appId: "1:691021243768:web:dec62d48f230d6c200548d",
+      measurementId: "G-QXYES6B1X2"
+    };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    
+    const provider = new GoogleAuthProvider();
+    
+    const auth = getAuth();
+    signInWithRedirect(auth, provider);
+  }, []);
+
   const [count, setCount] = useState(0)
   
   return (
