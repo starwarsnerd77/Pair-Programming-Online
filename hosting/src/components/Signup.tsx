@@ -2,11 +2,14 @@ import { useState } from "react";
 import { auth } from "../lib/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+
 
 export const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const provider = new GoogleAuthProvider();
 
   function signup() {
     createUserWithEmailAndPassword(auth, email, password)
@@ -37,7 +40,12 @@ export const Signup = () => {
         />
       </div>
       <button onClick={() => signup()}>Sign Up</button>
-      <button onClick={() => navigate("/login")}>Login</button>
+      <div>
+        <a onClick={() => navigate("/login")}>Already have an account? Log in here!</a>
+      </div>
+      <div>
+        <a onClick={() => signInWithRedirect(auth, provider)}>Sign in with Google</a>
+      </div>
     </div>
   );
 }

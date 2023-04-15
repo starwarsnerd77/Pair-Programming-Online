@@ -41,8 +41,12 @@ export const Login = () => {
                 />
             </div>
             <button onClick={() => login()}>Login</button>
-            <button onClick={() => navigate("/signup")}>Sign Up</button>
-            <button onClick={() => signInWithRedirect(auth, provider)}>Google</button>
+            <div>
+                <a onClick={() => navigate("/signup")}>Don't have an account? Sign up here!</a>
+            </div>
+            <div>
+                <a onClick={() => signInWithRedirect(auth, provider)}>Sign in with Google</a>
+            </div>
         </div>
     )
 }
