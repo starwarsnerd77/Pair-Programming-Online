@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { Signup } from './components/Signup'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -8,6 +6,7 @@ import { Layout } from './components/Layout'
 import { Login } from './components/Login'
 import { ErrorPage } from './components/ErrorPage'
 import { Dashboard } from './components/Dashboard'
+import { CodeEditor } from './components/CodeEditor';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />
+      },
+      {
+        path: "/editor",
+        element: <CodeEditor />
       }
     ]
   },
