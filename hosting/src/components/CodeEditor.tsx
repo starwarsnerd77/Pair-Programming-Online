@@ -80,8 +80,8 @@ export const CodeEditor = () => {
         });
     }
     
-    const handleEditorChange = (value: string) => {
-        setDocOnChange(value);
+    const handleEditorChange = (value: string | undefined) => {
+        setDocOnChange(value ? value : "");
     }
 
     const handleRoomChange = async (event: ChangeEvent<HTMLInputElement>) => {
