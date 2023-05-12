@@ -28,10 +28,11 @@ const numberOfDocs = async (room: number) => {
 }
 
 let room = Math.floor(100000 + Math.random() * 900000);
-
-while (await numberOfDocs(room) > 0) {
-    room = Math.floor(100000 + Math.random() * 900000);
-}
+(async function() {
+    while (await numberOfDocs(room) > 0) {
+        room = Math.floor(100000 + Math.random() * 900000);
+    }
+})();
 
 let unsub = () => {};
 
