@@ -104,7 +104,7 @@ export const Login = () => {
                 </Link>
                 </Grid>
                 <Grid item>
-                <Link href="#" variant="body2" onClick={() => navigate("/signup")}>
+                <Link variant="body2" onClick={() => navigate("/signup")}>
                     {"Don't have an account? Sign Up"}
                 </Link>
                 </Grid>

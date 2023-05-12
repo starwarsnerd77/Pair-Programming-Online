@@ -98,8 +98,13 @@ export const ResetPassword = () => {
                 Reset Password
             </Button>
             <Grid container>
+                <Grid item xs>
+                    <Link variant="body2" onClick={() => navigate("/login")}>
+                        {"Login here"}
+                    </Link>
+                </Grid>
                 <Grid item>
-                    <Link href="#" variant="body1" onClick={() => navigate("/signup")}>
+                    <Link variant="body2" onClick={() => navigate("/signup")}>
                         {"Don't have an account? Sign Up"}
                     </Link>
                 </Grid>
