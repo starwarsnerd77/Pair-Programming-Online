@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import React from 'react';
 import './App.css'
 import { Signup } from './components/Signup'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -7,6 +8,10 @@ import { Login } from './components/Login'
 import { ErrorPage } from './components/ErrorPage'
 import { Dashboard } from './components/Dashboard'
 import { CodeEditor } from './components/CodeEditor';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ResetPassword } from './components/ResetPassword';
+import { ResponsiveDrawer } from './components/ResponsiveDrawer';
+
 
 const router = createBrowserRouter([
   {
@@ -24,11 +29,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />
+        element: <ResponsiveDrawer />
       },
       {
         path: "/editor",
         element: <CodeEditor />
+      },
+      {
+        path: "/reset",
+        element: <ResetPassword />
       }
     ]
   },
@@ -36,7 +45,10 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <React.Fragment>
+      <CssBaseline />
+      <RouterProvider router={router} />
+    </React.Fragment>
   );
 }
 

@@ -1,6 +1,6 @@
 import { auth } from "../lib/firebase";
 import { useNavigate } from "react-router-dom";
-import { signInWithRedirect, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, sendPasswordResetEmail} from "firebase/auth";
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -31,19 +31,29 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-export const Login = () => {
+export const ResetPassword = () => {
     const navigate = useNavigate();
     const provider = new GoogleAuthProvider();
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const email = data.get('email')?.toString();
-        const password = data.get('password')?.toString();
 
-        signInWithEmailAndPassword(auth, email ? email : "", password ? password : "")
-                .then(({user}) => {
-                    console.log(user);
-                });
+        sendPasswordResetEmail(auth, email ? email : "")
+            .then(() => {
+                // Password reset email sent!
+                // ..
+                console.log("email sent");
+                navigate("/login")
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+
+                console.error(errorMessage, errorCode);
+            });
+
     };
 
     return (
@@ -62,7 +72,7 @@ export const Login = () => {
             <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-            Sign in
+            Reset Password
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -75,16 +85,6 @@ export const Login = () => {
                 autoComplete="email"
                 autoFocus
             />
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-            />
             {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
@@ -95,28 +95,20 @@ export const Login = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
             >
-                Sign In
+                Reset Password
             </Button>
             <Grid container>
                 <Grid item xs>
-                <Link variant="body2" onClick={() => navigate("/reset")}>
-                    Forgot password?
-                </Link>
+                    <Link variant="body2" onClick={() => navigate("/login")}>
+                        {"Login here"}
+                    </Link>
                 </Grid>
                 <Grid item>
-                <Link variant="body2" onClick={() => navigate("/signup")}>
-                    {"Don't have an account? Sign Up"}
-                </Link>
+                    <Link variant="body2" onClick={() => navigate("/signup")}>
+                        {"Don't have an account? Sign Up"}
+                    </Link>
                 </Grid>
             </Grid>
-            <Button 
-                variant="text"
-                className="login-with-google-btn"
-                onClick={() => signInWithRedirect(auth, provider)}
-                sx={{ mt: 3}}
-            >
-                Sign in with Google
-            </Button>
             </Box>
         </Box>
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
