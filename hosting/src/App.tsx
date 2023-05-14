@@ -10,6 +10,7 @@ import { Dashboard } from './components/Dashboard'
 import { CodeEditor } from './components/CodeEditor';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ResetPassword } from './components/ResetPassword';
+import { ResponsiveDrawer } from './components/ResponsiveDrawer';
 
 
 const router = createBrowserRouter([
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />
+        element: <ResponsiveDrawer />
       },
       {
         path: "/editor",

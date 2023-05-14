@@ -2,12 +2,29 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../lib/firebase";
 import { NavBar } from "./NavBar";
 import { useEffect, useState } from "react";
-import { getDocs, query, collection, where, setDoc, doc, serverTimestamp } from "firebase/firestore";
+import { getDocs, query, collection, where, setDoc, doc, serverTimestamp, Timestamp } from "firebase/firestore";
+import { ResponsiveDrawer } from "./ResponsiveDrawer";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Card from '@mui/material/Card';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import ShareIcon from '@mui/icons-material/Share';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Box from '@mui/material/Box';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 type SavedDocs = {
     title: string,
     uid: number,
-    code: string
+    code: string,
+    updatedAt: Timestamp
 }
 
 export const Dashboard = () => {
@@ -27,9 +44,9 @@ export const Dashboard = () => {
             const project: SavedDocs = {
                 title: doc.data().title,
                 uid: doc.data().uid,
-                code: doc.data().code
+                code: doc.data().code,
+                updatedAt: doc.data().updatedAt
             };
-
 
             setProjects(projects => [...projects, project]);
             // console.log(...result);
@@ -53,15 +70,32 @@ export const Dashboard = () => {
     }, []);
 
     return (
-        <div>
-            <NavBar />
-            <h1>This is your dashboard!!!!</h1>
+        <List>
             {projects.map((project, index) => (
-                <h2 key={index} onClick={() => loadSavedDoc(project)}>{project.title}</h2>
+                <Card key={index} sx={{ m: 2, padding: 0, height: 75 }}>
+                    <CardContent sx={{ display: 'flex', justifyContent: 'space-between'}}>
+                        <Typography variant="h5" display='inline' noWrap component='div'>{project.title}</Typography>
+                        <Typography variant="body2" display='inline' noWrap component='div'>{project.updatedAt.toDate().toString()}</Typography>
+                        <ButtonGroup>
+                            <IconButton aria-label="share">
+                                <ShareIcon />
+                            </IconButton>
+                            <IconButton aria-label="edit">
+                                <EditIcon />
+                            </IconButton>
+                            <IconButton aria-label="delete">
+                                <DeleteIcon />
+                            </IconButton>
+                        </ButtonGroup>
+                    </CardContent>
+                </Card>
+                // <ListItem key={index} disablePadding>
+                //     <Card></Card>
+                //     <ListItemButton onClick={() => loadSavedDoc(project)}>{project.title}</ListItemButton>
+                // </ListItem>
+                // <h2 key={index} onClick={() => loadSavedDoc(project)}>{project.title}</h2>
             ))}
-
-            <button onClick={() => navigate("/editor")}>Editor</button>
-            
-        </div>
+        </List>
+        // <button onClick={() => navigate("/editor")}>Editor</button>
     );
 }
