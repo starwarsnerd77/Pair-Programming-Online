@@ -74,8 +74,8 @@ export const Dashboard = () => {
             {projects.map((project, index) => (
                 <Card key={index} sx={{ m: 2, padding: 0, height: 75 }}>
                     <CardContent sx={{ display: 'flex', justifyContent: 'space-between'}}>
-                        <Typography variant="h5" display='inline' noWrap component='div'>{project.title}</Typography>
-                        <Typography variant="body2" display='inline' noWrap component='div'>{project.updatedAt.toDate().toString()}</Typography>
+                        <Typography variant="h5" display='flex' noWrap component='div' alignItems='center'>{project.title}</Typography>
+                        <Typography variant="body2" display='flex' noWrap component='div' alignItems='center'>{project.updatedAt.toDate().toString()}</Typography>
                         <ButtonGroup>
                             <IconButton aria-label="share">
                                 <ShareIcon />
